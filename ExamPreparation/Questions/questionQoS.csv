@@ -1,0 +1,44 @@
+type,Q/R
+,
+,
+[Classif Ordo Marqu] Qu'est ce que la classification par flux ?,Classification en fonction d'un ou plusieurs champs d'en-tête.
+[Classif Ordo Marqu] Qu'est ce que la classification par agrégat ?,Classification en fonction d'un seul champ : DSCP
+[Classif Ordo Marqu] Qu'est ce que DSCP ?,Differentiated Service Code Point
+[Classif Ordo Marqu] La classification par flux est-elle scalable ? Celle par agrégat ?,"Flux, non, il faut des tables avec deux, voire plus de champs. Agrégat oui car c'est juste un champ."
+[Classif Ordo Marqu] Que faut-il changer en cas de modification de la politique de gestion des paquets dans le cas d'une classif par Agrégat ?,Juste le premier routeur => Modif Transparente.
+[Classif Ordo Marqu] Donnez le principe de base de DIFFSERV.,Simplifier le travail des routeurs en aval de R1.
+[Ordonnancement] Quels sont les type d'ordonnancement ?,"FIFO, Priorité, Round Robin, Weighted Fair Queing."
+[Ordonnancement] Expliquez le fonctionnement de FIFO.,"Si un paquet arrive et que la file est vide alors il est traité. Si un paquet arrive et que la file n'est pas vide, il est mis en attente."
+[Ordonnancement] Qu'est ce que le tail drop ?,C'est quand la file est pleine on jette.
+[Ordonnancement] Expliquez le fonctionnement de Priorité.,"Les paquets arrivent et sont séparés en deux files. Si la plus prioritaire n'est pas vide, on la traite, sinon on traite l'autre. /!\ Pas de préemption d'un paquet en cours de service."
+[Ordonnancement] Expliquez le fonctionnement de Round Robin.,"Il s'agit d'un tourniquet sur N files. On traite un paquet de la file 1, puis 2, …, puis N et on recommence. Cela réparti équitablement la bande passante."
+[Ordonnancement] Expliquez le fonctionnement de Weighted Fair Queueing.,On donne un poids aux files Wi. On fait ensuite un tourniquet en essayant de garantir Fi = D * wi/Sum(wj). C'est dur parce que les paquets sont de taille variable et tranmission non préamptible.
+[Contrôle d'admission] Qu'est ce que le contrôle d'admission ?,Mécanisme permettant à un routeur d'accepter ou de refuser une requête de réservation de ressource.
+[Contrôle d'admission] Sur quel type de proto repose le contrôle d'admission ?,Sur un protocole de signalisation.
+[Contrôle d'admission] Quel est le protocole de signalisation le plus connu ? Comment il fonctionne ?,"RSVP de l'approche IntServ. On demande aux routeurs sur le chemin une réservation de ressources, ils peuvent, indépendamment des autres accepter ou refuser avec un algorithme local. Suivant la réponse, on fait dans un troisième temps la réservation."
+[Contrôle d'admission] Quels sont les paramètres importants pour décrire le trafic qu'une machine génère ? À quoi servent-ils ?,"Le débit moyen, le débit max, la taille max des rafales. C'est important pour l'opérateur pour qu'il puisse satisfaire un max de requêtes correctement. Ex : TSPEC modèle qui les utilise."
+[Contrôle de conformité] Qu'est ce que le policing et quels sont les actions de rétorsion ?,"On mesure le trafic et on vérifie s'il est conforme. Rétorsion : rétention des paquets non conformes, rejet, re-marquage pour que in-fine le trafic soit conforme à la caractérisation annoncée."
+[Mise en forme] Qu'est ce que le shaping ? À quoi sert-il ?,"Le shaping c'est la mise en forme du trafic. Si un site S1 à un accord avec S2, il se peut que la Sum des trafics venant des hôtes interne, ne respecte pas pendant une courte période le contrat, il faut donc le shaper."
+[Mise en forme] Donnez un algorithme de shaping.,"Le token bucket. On a un bucket qui se remplit à un débit donné de jetons. À chaque fois qu'un paquet arrive, il consomme son équivalent de jeton. S'il n'y a plus de jeton, le paquet attend que le bucket se remplisse."
+[IntServ] Donner les caractéristiques de IntServ.,Gestion de la QoS par flux. Réservation dynamique des ressources au niv de chacun des routeurs du chemin de donnée. Contrôle d'admission effectué via RSVP. 2 services de b à b : Guaranted Service et Controlled Load.
+[DiffServ] Donner les caractéristiques de DiffServ.,"Gestion de la QoS par classe de paquets IP. Pas de réserv mais SLA user/fournisseur ac spé : Qté max trafic par classe et conditionnement des paquets (Classif,Policing,Shaping,Scheduling). Pas de garantie de serv de b à b ms comportement local à tous les routeurs d'un même domaine."
+[IntServ] Comment est défini un flux ?,"C'est un {paquet ip} avec me (@ip,port UDP/TCP)dst <=> émis à dst d'un socket unicast ou multicast."
+[IntServ] Un flux provient-il d'un seul émetteur ou de plusieurs ?,Peut provenir de plusieurs.
+[Général] Que contient la QoS ?,délai fiabilité débit
+[IntServ] Comment est maîtrisée la QoS ? Qu'est ce que ça implique au niveau protocolaire ?,Réservation de ressources par flux jusqu'à la fin du flux pour TOUS les routeurs du chemin de donnée. Ça implique un proto de signalisation.
+[IntServ] Avec IntServ quels sont les 3 services au niveau IP ? Les décrire.,Best Effort : aucune garantie QoS [Web]. Guaranteed Service. Controlled Load.
+[IntServ] Que propose le service GS ? Pour quelles app est il fait ?,Garantie stricte sur délai transit max et Taux de perte quasi nul [appli RT dures]
+[IntServ] Que propose le service CL ? Pour quelles app est il fait ?,"Offre un service Best Effort en situation non congestionnée (même si il y a du monde) [app tolérantes, adaptatives]."
+[IntServ] Quelles sont les trois aspects dans le contrôle d'admission d'un flux F ?,1] App ! Requête de réserv pour F ac TSpec (trafic émetteur compte généré) RSpec (ressources que le récept souhaite réserver). 2] Transfert du TSpec et RSpec avec RSVP. 3] Décision locale à chaque routeur d'accepter ou refuser.
+[IntServ] Quels sont les param de TSpec ?,b : taille max rafale / r : débit moyen / p : débit crête / M : taille max des paquets / m : plus petites unit de facturat°
+[IntServ] Quels sont les param Important de Tspec ?,débit moyen(r) + taille max rafale (b) => Token Bucket. débit crête(p) 
+[IntServ] Quels sont les param de RSpec ?,débit moyen requis R(rate)>r / tolérance dur délai S(Slack term)
+[RSVP] Que signifie RSVP ? Comment l'utilisent les applications ?,Resource reSerVation Protocol. Grâce à la R API.
+[RSVP] Que permet-il de faire à chacun des recepteurs ?,D'éffectuer une REQUET de réservation de ressources pour un flux unidirect.
+[RSVP] Qu'est ce qu'une session RSVP ?,@Ipdest + proto de Transport (UDP ou TCP) + n° port dst
+[RSVP] Sur le modèle OSI ou se situe RSVP ?,Au dessus de IP à côté de UDP/TCP donc transport.
+[RSVP] Donnez les 2 étapes de réservation RSVP.,Et1 : géné PDU RSVP PATH dest au récep ac TSPEC. Chaq rtr enregistre un état local identif le flux 'soft state' Et2 : recept géné PDU RSVP RESV ac GS:CL / Tspec / Rspec (R ≥ r + SlackT). Rtrs enregistrent la resa dans le soft state puis transmt RESV au suivant. Soit l'émetteur reçoit le RESV soit RESV-ERROR (si 1 rtr n'a pas pu)
+[RSVP] Le PDU RESV-ERROR est-il seulement transmit à l'émetteur ?,Non aussi en amont.
+[RSVP] Qu'est ce qui maintient l'état de soft state au sein des rtrs ?,"La réception de PDU PATH. Sans réception, la réserv est implicitement relachée."
+[RSVP] Une réservation fait-elle référence à l'émetteur ?,Non mais potentiellement si (style de rés)
+[RSVP] Quels sont les 3 styles de réservation ?,Wildcard : BP partageable entre tous les émetteurs potentiels/ Fixed Filter : BP doit être rés pour chacun des émetteurs (donne une liste d'@IP) / Shared Explicit : BP rés pour tous les émetteurs explicitement mentionnés (visio conf)

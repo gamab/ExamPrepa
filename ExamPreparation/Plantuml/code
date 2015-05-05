@@ -1,0 +1,32 @@
+loop 1..n
+A->M : getQuestion()
+M->A : curQ
+A->V : setQuestion(curQ)
+V->LU : Question()
+A->M : getNbCorrectAns()
+M->A : nbCor
+A->V : setNbCorrectAns(nbCor)
+V->LU : NbCorrectAns()
+LU->V : Show()
+V->A : processShowAnswer()
+A->V :
+A->M : getAnswer()
+M->A : ans
+A->V : setAnswer(ans)
+V->LU : Answer()
+alt User choice
+LU->V : True()
+V->A : processUserWasRight()
+A->V : 
+A->M : userWarRightForCurrentQuestion()
+M->A :
+else
+LU->V : False()
+V->A : processUserWasWrong()
+A->V : 
+A->M : userWarWrongForCurrentQuestion()
+M->A :
+end alt
+A->M : nextQuestion()
+M->A : 
+end loop

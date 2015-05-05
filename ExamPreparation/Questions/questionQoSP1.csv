@@ -1,0 +1,42 @@
+type,Q/R
+,
+,
+[AMD] Qu'est ce qu'une AMD ?,Une Application Multimédia Distribuée
+[AMD] Quelles sont les deux possibilités de rapatriement du fichier A/V ?,"Soit on rapatrie tout le fichier.
+Soit on commence sa présentation avant la fin rapatriement"
+"[AMD] Dans le cas du rapatriement de tout un fichier A/V, qu'elle est la seule contrainte (souhait) ?",On souhaite un rapatriement rapide (contrainte faible)
+"[AMD] Pourquoi présenter le fichier avant la fin de son rapatriement ?
+Quels sont les risques ?","On souhaite diminuer l'attente de l'utilisateur (temps du rapatriement)
+Risques : engorgement du réseau, possibilité de trous temporaires"
+"[AMD] Dans les applications peu intéractives (stream A/V), y a t-il une contrainte ?",Contrainte temporelle faible  délai de qlq sec admissible
+[AMD] Streaming peut-il être point à multipoint ?,Oui
+[AMD] Comment qualifiriez vous la voix sur ip et la visioconférence ? Ce sont des applications :,Fortement intéractives
+"[AMD] Comment qualifiriez vous les contraintes temporelles des applications type VoIP ?
+Donnez les échelles de temps de ces contraintes sur le délai de transit.","Forte
+Délai de transit (DT) < 150ms (parfait)
+150ms < DT < 400ms (acceptable)
+400ms < DT (inacceptable)"
+"[AMD] Sur un graphe Packet Loss de 0%-5% en fonction de Delay 100ms-1s-10s-100s, où placeriez vous les services de streaming ? De BackGround ? Interactive ?","Streaming : < 10s ~ 2,5%
+Background : ~ 100s 0%
+Interactive : ~100ms ~4%
+ "
+[AMD] Quels sont les 4 services pour lesquels on ne peut pas perdre de paquets ?,"CommandControl (en plus faut que ce soit rapide)
+Transaction
+Download
+Background"
+[Limit internet QoS] En quoi les systemes autonomes sont-ils autonaumes ?,Politique de routage en interne et de sécurité
+[Limit internet QoS] Quel type de service fourni IP ?,"Sans garanties QoS, best effort"
+[Limit internet QoS] Les services internet sont-ils adaptés aux app multimédia ?,Non
+[Limit internet QoS] Quelles 3 solutions ont été adoptées au niveau APPLICATIF pour pallier aux défauts de l'internet vis à vis des AMD ?,"Software : Gestion de la synchro temporelle intra-flux (absorption de la gigue,…)
+Protocole : Gestion des pertes (Forward Error Correction, Entrelacements…)
+Protocole : Nouveaux protocoles Middleware (RTP RTCP)"
+"[Limit internet QoS] Quelles 3 solutions ont été adoptées au niveau RESEAU pour pallier aux défauts de l'internet vis à vis des AMD ? Y a t-il garantie de bout en bout, est-ce viable ?","Matériel : Surdimensionnement en BP : backbone de type ATM ou GigaEth
+Software : Meilleur gestion des ressources : MPLS
+Administratif : Contrats de trafic et Accords de « peering »
+Pas de garanties de bout à bout, pas viable économiquement et techniquement"
+[Limit internet QoS] Quels sont les deux modèles de service pour la garantie QoS au niveau IP ?,IntServ et DiffServ
+[Limit internet QoS] Quels sont les trois protocoles qui ont été créés pour étendre les fonctionnalité de UDP/TCP ?,"DCCP : Contrôles de congestion paramétrables
+SCTP : multi-homing multi-connexion
+POC : Contrôle de pertes à ordre et fiabilité partiels"
+[Limit internet QoS] Quels sont les deux plans de l'architecture à deux plans ?,"Donnée : Intégrant les nouveaux services IP et protocoles Transport
+Plan de contrôle : Visant à prendre en compte les problèmes en relation avec l'aspect multi-domaines et techno hétérogène de l'Internet. Dans ce plan on retrouve donc : provisionnement des services (dimensionnement = fct contrats) contrôle d'admission (éval et réserv ressources) signalisation (csqc du contrôle)"

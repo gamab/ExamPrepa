@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ExamPreparation</string>
+    <string name="txtTitle">Question de préparation à l\'examen</string>
+    <string name="btnTrue">Juste</string>
+    <string name="btnFalse">Faux</string>
+    <string name="btnShow">Montrer</string>
+
+    <string name="noMoreQuestions">Il n\'y a plus de questions pour vous.</string>
+    <string name="noMoreAnswers">Vous avez tout trouvé.</string>
+    <string name="btnContinue">Continuer</string>
+    <string name="btnReset">Repartir de 0</string>
+    <string name="btnReload">Recharger les questions</string>
+    <string name="errorLoadingFile">Pas pu ouvrir le fichier de questions, lu 0 question</string>
+    <string name="loadFile">Fichier de question chargé</string>
+    <string name="resetQuestions">Nombre de réponses justes remit à 0</string>
+    <string name="continuingLastTry">Bonne continuation</string>
+    <string name="unknownChoice">Nous ne connaissons pas ce choix, il doit y avoir une erreur</string>
+
+    <style name="ButtonText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+
+</resources>

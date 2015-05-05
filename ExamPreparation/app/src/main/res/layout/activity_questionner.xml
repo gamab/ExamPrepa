@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+    android:background="@color/darkgrey1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/txtTitle"
+        android:id="@+id/title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/lightblue1"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:gravity="center_vertical|center|center_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/txtQuestion"
+            android:textColor="@color/lightgrey1"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:layout_alignParentTop="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/txtAnswer"
+            android:textColor="@color/lightgrey1"
+            android:layout_below="@+id/txtQuestion"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"  />
+
+
+
+
+    </RelativeLayout>
+
+    <Button
+        style="@style/ButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnShow"
+        android:id="@+id/btnShow"
+        android:background="@drawable/btn_yellow"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratbNbFound"
+        android:numStars="@integer/numberOfStars"
+        android:nestedScrollingEnabled="false"
+        android:clickable="false"
+        android:progressBackgroundTint="@color/lightgrey1"
+        android:progressTint="@color/lightblue1"
+        android:rating="0"
+        android:layout_above="@+id/btnShow"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="@style/ButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnTrue"
+        android:id="@+id/btnTrue"
+        android:background="@drawable/btn_blue"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <Button
+        style="@style/ButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnFalse"
+        android:id="@+id/btnFalse"
+        android:background="@drawable/btn_red"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/darkgrey1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/txtTitle"
+        android:id="@+id/title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/lightblue1"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:gravity="center_vertical|center|center_horizontal" />
+
+
+    <Button
+        style="@style/ButtonText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnContinue"
+        android:id="@+id/btnContinue"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_red"
+        android:layout_below="@+id/title" />
+
+
+    <Button
+        style="@style/ButtonText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnReset"
+        android:id="@+id/btnReset"
+        android:background="@drawable/btn_blue"
+        android:layout_below="@+id/btnContinue"  />
+
+    <Button
+        style="@style/ButtonText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnReload"
+        android:id="@+id/btnReload"
+        android:background="@drawable/btn_yellow"
+        android:layout_below="@+id/btnReset" />
+
+
+
+
+
+
+</RelativeLayout>
