@@ -6,6 +6,7 @@
     <string name="btnTrue">Juste</string>
     <string name="btnFalse">Faux</string>
     <string name="btnShow">Montrer</string>
+    <string name="txtSlashNote">/</string>
 
     <string name="noMoreQuestions">Il n\'y a plus de questions pour vous.</string>
     <string name="noMoreAnswers">Vous avez tout trouvé.</string>
@@ -13,6 +14,7 @@
     <string name="btnReset">Repartir de 0</string>
     <string name="btnReload">Recharger les questions</string>
     <string name="errorLoadingFile">Pas pu ouvrir le fichier de questions, lu 0 question</string>
+    <string name="errorRetreivingState">Pas pu reloader la question d\'avant fermeture</string>
     <string name="loadFile">Fichier de question chargé</string>
     <string name="resetQuestions">Nombre de réponses justes remit à 0</string>
     <string name="continuingLastTry">Bonne continuation</string>

@@ -6,7 +6,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
-    android:background="@color/darkgrey1">
+        android:background="@color/darkgrey1">
+
+    <Button
+        style="@style/ButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnShow"
+        android:id="@+id/btnShow"
+        android:background="@drawable/btn_yellow"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,12 +32,12 @@
         android:gravity="center_vertical|center|center_horizontal" />
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/txtQuestion"
@@ -48,20 +58,7 @@
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"  />
 
-
-
-
     </RelativeLayout>
-
-    <Button
-        style="@style/ButtonText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnShow"
-        android:id="@+id/btnShow"
-        android:background="@drawable/btn_yellow"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -73,8 +70,41 @@
         android:progressBackgroundTint="@color/lightgrey1"
         android:progressTint="@color/lightblue1"
         android:rating="0"
-        android:layout_above="@+id/btnShow"
+        android:layout_above="@+id/layNumQuestionCount"
         android:layout_centerHorizontal="true" />
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layNumQuestionCount"
+        android:layout_above="@+id/btnShow"
+        android:gravity="center_horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/txtNbNTAQuestion"
+            android:textColor="@color/lightgrey1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/txtSlashNote"
+            android:text="@string/txtSlashNote"
+            android:layout_toRightOf="@+id/txtNbNTAQuestion"
+            android:textColor="@color/lightgrey1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/txtNbTotQuestion"
+            android:layout_toRightOf="@+id/txtSlashNote"
+            android:textColor="@color/lightgrey1"/>
+
+    </RelativeLayout>
 
     <Button
         style="@style/ButtonText"

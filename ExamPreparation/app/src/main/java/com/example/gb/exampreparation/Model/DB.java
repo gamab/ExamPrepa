@@ -46,7 +46,7 @@ public class DB extends SQLiteOpenHelper {
      */
     public void deleteEverything() {
         SQLiteDatabase db = getWritableDatabase();
-        onUpgrade(db,1,2);
+        onUpgrade(db, 1, 2);
     }
 
     public void printDB() {
@@ -118,7 +118,7 @@ public class DB extends SQLiteOpenHelper {
 
         //Log.d(DATABASE_NAME, "Query is : " + query);
 
-        Cursor cursor = sd.rawQuery(query,null);
+        Cursor cursor = sd.rawQuery(query, null);
 
         if (cursor.moveToNext()) {
             totalNbrQ = cursor.getInt(0);
@@ -131,10 +131,10 @@ public class DB extends SQLiteOpenHelper {
     }
 
     /**
-     * Get the number of questions that don't have five stars already (NFS = Non Five Stars)
-     * @return the number of NFS questions
+     * Get the number of questions that don't have five stars already (NTA = Non Totally Answered)
+     * @return the number of Non Totally Answered questions
      */
-    public int getNumberOfNFSQuestion() {
+    public int getNumberOfNTAQuestion() {
         int totalNbrQ = 0;
 
         SQLiteDatabase sd = getWritableDatabase();
@@ -159,39 +159,32 @@ public class DB extends SQLiteOpenHelper {
         return totalNbrQ;
     }
 
+
+
     /**
-     * Get question From Non Five Stars allows to retrieve the question at the row i
+     * Get question from the database where id = i
      * @param i
      * @return
      */
-    public Question getQuestionFNFS(int i) {
+    public Question getQuestion(int i) {SQLiteDatabase sd = getWritableDatabase();
         Question q = null;
-        String question = null;
-        String answer = null;
-        int nbCorrect;
-        int realId = convertNFSIdToRealId(i);
 
-        SQLiteDatabase sd = getWritableDatabase();
-
-        String query = "SELECT " + TABLE_NAME + "." + TABLE_QUESTION + ", "
+        String query = "SELECT " + TABLE_NAME + "." + TABLE_ID + ", "
+                + TABLE_NAME + "." + TABLE_QUESTION + ", "
                 + TABLE_NAME + "." + TABLE_ANSWER + ", "
                 + TABLE_NAME + "." + TABLE_NBCORRECT + " ";
 
         query += "FROM " + TABLE_NAME + " ";
 
         query += "WHERE " + TABLE_NAME + "." + TABLE_NBCORRECT + " < " + ConstanteQuestion.MAX_ASK + " AND "
-                + TABLE_ID + " = " + realId + ";";
+                + TABLE_ID + " = " + i + ";";
 
         //Log.d(DATABASE_NAME, "Query is : " + query);
 
         Cursor cursor = sd.rawQuery(query,null);
 
         if (cursor.moveToNext()) {
-            question = cursor.getString(0);
-            answer = cursor.getString(1);
-            nbCorrect = cursor.getInt(2);
-            q = new Question(question, answer);
-            q.setNbrCorrect(nbCorrect);
+            q = new Question(cursor.getString(1), cursor.getString(2),cursor.getInt(3),cursor.getInt(0));
             //Log.d(DATABASE_NAME, "%%%%%> Found question for " + i + " in NFS questions");
         }
         //else {
@@ -202,9 +195,27 @@ public class DB extends SQLiteOpenHelper {
         //if (q==null) {
         //    Log.d(DATABASE_NAME, "Did not Find question");
         //}
+
         return q;
     }
 
+    /**
+     * Get question From Non Totally Answered questions allows to retrieve the question at the row i
+     * @param i
+     * @return
+     */
+    public Question getQuestionFNTA(int i) {
+        int realId = convertNTAIdToRealId(i);
+
+        return getQuestion(realId);
+    }
+
+    /**
+     * Sets the number of correct answers for a question to nbCorrect for the question at id in the db
+     * @param id the id of the question in the database
+     * @param nbCorrect the number of times the user answered correctly to the question
+     * @return whether it could are not
+     */
     public boolean setQuestionNbCorrect(int id, int nbCorrect) {
         //Log.d(DATABASE_NAME,"Change number of correct in the db");
         SQLiteDatabase sd = getWritableDatabase();
@@ -216,6 +227,10 @@ public class DB extends SQLiteOpenHelper {
         return (result >= 0);
     }
 
+    /**
+     * Sets the number of correct answers for a question to 0
+     * @return whether it could or not
+     */
     public boolean resetAllQuestionsNbCorrect() {
         //Log.d(DATABASE_NAME,"Change number of correct in the db");
         SQLiteDatabase sd = getWritableDatabase();
@@ -226,7 +241,7 @@ public class DB extends SQLiteOpenHelper {
         return (result >= 0);
     }
 
-    public boolean setQuFNFSNbCorrect(int id, int nbrCorrect) {
+    /*public boolean setQuFNFSNbCorrect(int id, int nbrCorrect) {
         boolean couldSetNbCorrect = false;
         int realId;
 
@@ -236,16 +251,16 @@ public class DB extends SQLiteOpenHelper {
         }
 
         return couldSetNbCorrect;
-    }
+    }*/
 
     /**
      * Converts an id of a non five star question into a real id in the DB
      * The user of the database wants to change a field the second question from the questions that are not with five stars
      * hence we have to get the real id of this question, it might be the 4th question for instance
-     * @param nfsId the number of the question that doesn't have five stars already
+     * @param ntaId the number of the question that haven't been already totally answered
      * @return the real id of this question in the database
      */
-    private int convertNFSIdToRealId (int nfsId) {
+    private int convertNTAIdToRealId (int ntaId) {
         int id = -1;
 
         SQLiteDatabase sd = getWritableDatabase();
@@ -256,7 +271,7 @@ public class DB extends SQLiteOpenHelper {
 
         query += "WHERE " + TABLE_NAME + "." + TABLE_NBCORRECT + " < " + ConstanteQuestion.MAX_ASK + " ";
 
-        query += "LIMIT 1 OFFSET " + (nfsId - 1) + " ;";
+        query += "LIMIT 1 OFFSET " + (ntaId - 1) + " ;";
 
         //Log.d(DATABASE_NAME, "=====>Query is : " + query);
 
@@ -269,4 +284,5 @@ public class DB extends SQLiteOpenHelper {
         cursor.close();
         return id;
     }
+
 }

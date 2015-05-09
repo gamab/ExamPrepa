@@ -10,7 +10,7 @@ import android.widget.Button;
 public class QuestionnerLauncherActivity extends Activity {
 
     public static final String EXTRA = "ACTION";
-    public static final int CONTINUE = 1;
+    public static final byte CONTINUE = 1;
     public static final byte RESET = 2;
     public static final byte RELOAD = 3;
     public static final byte UNKNOWN = 4;

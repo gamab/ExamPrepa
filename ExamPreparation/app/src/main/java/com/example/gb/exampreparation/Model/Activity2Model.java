@@ -13,6 +13,10 @@ public interface Activity2Model {
 
     public String getAnswer();
 
+    public int getQuestionId();
+
+    public int getNTAQuestionId();
+
     public void rememberUserWasCorrect(boolean correct);
 
     public void nextQuestion();
@@ -20,4 +24,8 @@ public interface Activity2Model {
     public void reloadDBWithQuestion(ArrayList<Question> qs);
 
     public void resetAllQuestionsNbCorrect();
+
+    public int getTotalNumberOfQuestions();
+
+    public int getNumberOfNonTotallyAnsweredQuestions();
 }

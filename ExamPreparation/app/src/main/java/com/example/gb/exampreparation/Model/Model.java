@@ -1,7 +1,6 @@
 package com.example.gb.exampreparation.Model;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -16,17 +15,33 @@ public class Model implements Activity2Model {
     private Random mR;
     private DB mDb;
     private Question mCurQ;
-    private int mCurId;
+    private int mNTAId;
     private int mTotalNbrQ;
 
+    /**
+     * Create a new model
+     * @param ctxt
+     */
     public Model(Context ctxt) {
+        mDb = new DB(ctxt);
 
+        mR = new Random();
+    }
+
+    /**
+     * Recreate the model as it was
+     * @param ctxt
+     * @param ntaId the Not Totally Answered Question Id
+     * @param questionId the real question Id
+     */
+    public Model(Context ctxt,int ntaId, int questionId) {
         mDb = new DB(ctxt);
 
         mR = new Random();
 
-        //Let's get the next question so that mCur and mCurQ are set
-        nextQuestion();
+        mNTAId = ntaId;
+
+        mCurQ = mDb.getQuestion(questionId);
     }
 
 
@@ -38,6 +53,21 @@ public class Model implements Activity2Model {
         else {
             return null;
         }
+    }
+
+    @Override
+    public int getQuestionId() {
+        if (mCurQ != null) {
+            return mCurQ.getId();
+        }
+        else {
+            return -1;
+        }
+    }
+
+    @Override
+    public int getNTAQuestionId() {
+        return mNTAId;
     }
 
     @Override
@@ -68,7 +98,8 @@ public class Model implements Activity2Model {
                 nb++;
                 mCurQ.setNbrCorrect(nb);
                 if (mTotalNbrQ != 0) {
-                    mDb.setQuFNFSNbCorrect(mCurId, mCurQ.getNbrCorrect());
+                    mDb.setQuestionNbCorrect(mCurQ.getId(), mCurQ.getNbrCorrect());
+                    mDb.printDB();
                 }
             }
         }
@@ -77,24 +108,24 @@ public class Model implements Activity2Model {
     @Override
     public void nextQuestion() {
         //Log.d(TAG, "\n==============================================================\n");
-        int nextQId = mCurId;
-        mTotalNbrQ = mDb.getNumberOfNFSQuestion();
+        int nextQId = mNTAId;
+        mTotalNbrQ = mDb.getNumberOfNTAQuestion();
         //Log.d(TAG,"Total question available " + mTotalNbrQ);
         if (mTotalNbrQ == 0) {
-            mCurId = 0;
+            mNTAId = 0;
             mCurQ = null;
         }
         else {
             if (mTotalNbrQ == 1) {
-                mCurId = 1;
+                mNTAId = 1;
             }
             else {
-                while (nextQId == mCurId) {
+                while (nextQId == mNTAId) {
                     nextQId = mR.nextInt(mTotalNbrQ) + 1;
                 }
-                mCurId = nextQId;
+                mNTAId = nextQId;
             }
-            mCurQ = mDb.getQuestionFNFS(mCurId);
+            mCurQ = mDb.getQuestionFNTA(mNTAId);
             //if (mCurQ == null) {
             //    Log.d(TAG, "Aie no more questions apparently for " + mCurId);
             //}
@@ -116,6 +147,19 @@ public class Model implements Activity2Model {
 
     @Override
     public void resetAllQuestionsNbCorrect() {
+        if (mCurQ != null) {
+            mCurQ.setNbrCorrect(0);
+        }
         mDb.resetAllQuestionsNbCorrect();
+    }
+
+    @Override
+    public int getTotalNumberOfQuestions() {
+        return mDb.getTotalNumberOfQuestion();
+    }
+
+    @Override
+    public int getNumberOfNonTotallyAnsweredQuestions() {
+        return mDb.getNumberOfNTAQuestion();
     }
 }

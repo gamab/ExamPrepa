@@ -10,11 +10,21 @@ public class Question {
     private String ans;
     //the number of correct answers
     private int nbrCorrect;
+    //the id of the question
+    private int id;
 
     public Question(String q, String ans) {
         this.q = q;
         this.ans = ans;
         this.nbrCorrect = 0;
+        this.id=0;
+    }
+
+    public Question(String q, String ans,int nbrCorrect, int id) {
+        this.q = q;
+        this.ans = ans;
+        this.nbrCorrect = nbrCorrect;
+        this.id=id;
     }
 
     public String getQ() {
@@ -41,6 +51,14 @@ public class Question {
             this.nbrCorrect = nbrCorrect;
         else
             this.nbrCorrect = ConstanteQuestion.MAX_ASK;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

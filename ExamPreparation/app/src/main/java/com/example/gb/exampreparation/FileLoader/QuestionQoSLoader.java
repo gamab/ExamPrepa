@@ -1,6 +1,5 @@
-package com.example.gb.exampreparation.Revision;
+package com.example.gb.exampreparation.FileLoader;
 
-import android.os.Environment;
 import android.util.Log;
 
 import com.example.gb.exampreparation.Model.Question;
@@ -19,6 +18,7 @@ import java.util.regex.Pattern;
 public class QuestionQoSLoader {
 
     private static final String TAG = "QuestionReader";
+    public static final char endlReplacer = '|';
 
     //FilePath within the sd card ex : /sdcard/DCIM/App/questionQoS.csv
     public static ArrayList<Question> retrieveQuestionsFromFile(String filePath) {
@@ -38,7 +38,7 @@ public class QuestionQoSLoader {
 
             while ((line = br.readLine()) != null) {
                 text.append(line);
-                text.append('|'); //| will be our \n
+                text.append(endlReplacer); //append a end line replacer
             }
             br.close();
         }
@@ -68,18 +68,29 @@ public class QuestionQoSLoader {
         Matcher match = pattern.matcher(text);
         Log.d(TAG,"=====>Let s see matches");
 
-        //get read of the first three lines
+        //get rid of the first three lines
         for (int i = 0; i < 3; i++) {
             match.find();
         }
         while (match.find()) {
             //System.out.println(" found $1 : " + match.group(0));
-            q = match.group(1);
-            a = match.group(3);
+            q = replaceEndlReplacer(match.group(1));
+            a = replaceEndlReplacer(match.group(3));
             qs.add(new Question(q,a));
             Log.d(TAG, "=====>found question " + qs.get(qs.size() - 1));
         }
 
         return qs;
+    }
+
+    public static String replaceEndlReplacer(String toReplace) {
+        char[] replacer = toReplace.toCharArray();
+        for (int i = 0; i < replacer.length; i++) {
+            if (replacer[i]==endlReplacer) {
+                replacer[i] = '\n';
+                Log.d(TAG, "=====>found endl to replace.");
+            }
+        }
+        return new String(replacer);
     }
 }
