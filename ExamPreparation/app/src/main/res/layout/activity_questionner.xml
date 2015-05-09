@@ -34,7 +34,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/title">
 
         <TextView
             android:layout_width="fill_parent"
@@ -45,18 +46,17 @@
             android:textStyle="bold"
             android:gravity="center_horizontal"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
             android:layout_alignParentTop="true"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/txtAnswer"
             android:textColor="@color/lightgrey1"
             android:layout_below="@+id/txtQuestion"
             android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"  />
+            android:gravity="left"  />
 
     </RelativeLayout>
 
